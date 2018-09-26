@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Coin
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Coin
   - 
   - 
   - 
@@ -49,4 +51,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 349780933
+    locked: 0
+  - name: UI
+    uniqueID: 3545111711
     locked: 0

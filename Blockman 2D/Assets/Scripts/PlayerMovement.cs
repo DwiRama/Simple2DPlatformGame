@@ -13,9 +13,21 @@ public class PlayerMovement : MonoBehaviour {
     float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
+    bool cannotMove = false;
+
+    public void ToggleMovement(bool status)
+    {
+        cannotMove = !status;
+    }
 
 	void Update() {
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (cannotMove)
+        {
+            animator.SetFloat("Speed", 0);
+            return;
+        }
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump"))
@@ -44,7 +56,11 @@ public class PlayerMovement : MonoBehaviour {
     }
 	
 	void FixedUpdate () {
+        if (cannotMove)
+            horizontalMove = 0;
+
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
 	}
+        
 }
