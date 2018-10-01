@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
-            jumpSound.Play();
+            if (!jumpSound.isPlaying)
+                jumpSound.Play();
         }
 
         if (Input.GetButton("Jump"))
