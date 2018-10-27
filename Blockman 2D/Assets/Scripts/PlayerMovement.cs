@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public CharacterController2D controller;
+    public CharacterController2D controller; // Class that handles character physics
     public Animator animator;
     public AudioSource jumpSound;
 
-    public float runSpeed = 40;    
+    public float runSpeed = 40; //Amount of speed to give to a player
 
-    float horizontalMove = 0f;
+    float horizontalMove = 0f; //Movement Direction
     bool jump = false;
-    bool crouch = false;
     bool cannotMove = false;
 
     public void ToggleMovement(bool status)
     {
         cannotMove = !status;
-    }
+    }//
 
 	void Update() {
         if (cannotMove)
@@ -41,27 +40,18 @@ public class PlayerMovement : MonoBehaviour {
             jump = true;
             animator.SetBool("IsJumping", true);
         }
-
-        if (Input.GetButton("Crouch"))
-        {
-            crouch = true;
-        } else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
-        }
     }
 
-    public void OnLanding()
-    {
-        animator.SetBool("IsJumping", false);
-    }
-	
 	void FixedUpdate () {
         if (cannotMove)
             horizontalMove = 0;
 
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
         jump = false;
 	}
-        
+    
+    public void OnLanding()
+    {
+        animator.SetBool("IsJumping", false);
+    }//
 }

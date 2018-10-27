@@ -8,12 +8,13 @@ public class GameMaster : MonoBehaviour {
 
     public static GameMaster _GM;
 
-    public SceneConnector SceneConnector;
     public PlayerMovement playerMovement;
     public Text coinsCollectText;
     public AudioSource music;
     public bool victory = false;
     public Image clearMessage;
+
+    public SceneConnector SceneConnector;
     public string nextScene;
 
     public UnityEvent OnVictory;
@@ -33,6 +34,11 @@ public class GameMaster : MonoBehaviour {
         UpdateCoinCounterText();
     }
 
+    public void UpdateCoinCounterText()
+    {
+        coinsCollectText.text = "Coins: " + coinCounter;
+    }
+    
     public void Victory(AudioSource victoryMusic)
     {
         playerMovement.ToggleMovement(false);
@@ -41,11 +47,6 @@ public class GameMaster : MonoBehaviour {
         victory = true;
         clearMessage.enabled = true;
         OnVictory.Invoke();
-    }
-
-    public void UpdateCoinCounterText()
-    {
-        coinsCollectText.text = "Coins: " + coinCounter;
     }
 
     public void LoadScene()
